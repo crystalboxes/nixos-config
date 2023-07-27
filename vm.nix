@@ -1,8 +1,10 @@
 {conifg, pkgs, lib, ...}: {
   imports = [
-    "./base.nix"  
+    ./base.nix
+    ./modules/vmware-guest.nix
   ];
   boot.binfmt.emulatedSystems = ["x86_64-linux"];
+  disabledModules = [ "virtualisation/vmware-guest.nix" ];
 
   networking.interfaces.ens160.useDHCP = true;
   nixpkgs.config.allowUnfree = true;

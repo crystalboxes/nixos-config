@@ -12,18 +12,18 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { self, nixpkgs, home-manager, ... }: {
     nixosConfigurations.main = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         # TODO: Add overlays?
-        "./hardware.nix"
-        "./vm.nix"
-        "./user/user.nix"
+        ./hardware.nix
+        ./vm.nix
+        ./user/user.nix
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.snowbear = import ../user/home-manager.nix;
+          home-manager.users.snowbear = import ./user/home-manager.nix;
         }
       ];
     };
