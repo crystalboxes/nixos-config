@@ -242,7 +242,7 @@ in {
         { key = "C"; mods = "Command"; action = "Copy"; }
         { key = "Key0"; mods = "Command"; action = "ResetFontSize"; }
         { key = "Equals"; mods = "Command"; action = "IncreaseFontSize"; }
-        { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
+       # { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
       ];
     };
   };
