@@ -55,6 +55,18 @@ in {
     pkgs.firefox
     pkgs.rofi
     pkgs.zathura
+    
+    pkgs.stdenvNoCC.mkDerivation {
+      name = "pragmata-font";
+      dontConfigue = true;
+      src = ./fonts;
+      installPhase = ''
+        mkdir -p $out/share/fonts
+        cp -R $src/ $out/share/fonts/
+      '';
+      meta = { description = "The Pragmata Pro Font derivation."; };
+    };
+
   ]);
 
   #---------------------------------------------------------------------
