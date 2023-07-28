@@ -49,7 +49,7 @@
     nixosConfigurations.main = mkVM "vm-aarch64" {
       inherit nixpkgs home-manager;
       system = "aarch64-linux";
-      user   = "mitchellh";
+      user   = "snowbear";
 
       overlays = overlays ++ [(final: prev: {
         # Example of bringing in an unstable package:
