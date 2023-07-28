@@ -47,6 +47,7 @@ in {
     pkgs.ripgrep
     pkgs.tree
     pkgs.watch
+    pkgs.vscode
 
     pkgs.gopls
     pkgs.zigpkgs.master
