@@ -12,6 +12,17 @@ let
     '' else ''
     cat "$1" | col -bx | bat --language man --style plain
   ''));
+
+  pragmatafont = pkgs.stdenvNoCC.mkDerivation {
+    name = "pragmata-font";
+    dontConfigue = true;
+    src = ./fonts;
+    installPhase = ''
+      mkdir -p $out/share/fonts
+      cp -R $src/ $out/share/fonts/
+    '';
+    meta = { description = "The Pragmata Pro Font derivation."; };
+  };
 in {
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
@@ -56,16 +67,7 @@ in {
     pkgs.rofi
     pkgs.zathura
     
-    pkgs.stdenvNoCC.mkDerivation {
-      name = "pragmata-font";
-      dontConfigue = true;
-      src = ./fonts;
-      installPhase = ''
-        mkdir -p $out/share/fonts
-        cp -R $src/ $out/share/fonts/
-      '';
-      meta = { description = "The Pragmata Pro Font derivation."; };
-    }
+    pragmatafont
   ]);
 
   #---------------------------------------------------------------------
