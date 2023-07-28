@@ -2,8 +2,10 @@
 
 let
   sources = import ../../nix/sources.nix;
+  helix = import ./helix.nix;
+  
   isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
+  isLinux = pkgs.stdenv.isLinux;  
 
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
@@ -47,13 +49,10 @@ in {
     pkgs.ripgrep
     pkgs.tree
     pkgs.watch
-    pkgs.vscode
+    
 
     pkgs.gopls
     pkgs.zigpkgs.master
-
-    # Node is required for Copilot.vim
-    pkgs.nodejs
 
     (pkgs.python3.withPackages (p: with p; [
       ipython
@@ -70,7 +69,7 @@ in {
     pkgs.zathura
     
     pragmatafont
-  ]);
+  ]) ++ helix.packages;
 
   #---------------------------------------------------------------------
   # Env vars and dotfiles
@@ -185,23 +184,6 @@ in {
     enable = true;
     userName = "crystalboxes";
     userEmail = "crystalboxesgfx@gmail.com";
-    # signing = {
-    #   key = "523D5DC389D273BC";
-    #   signByDefault = true;
-    # };
-    # aliases = {
-    #   prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-    #   root = "rev-parse --show-toplevel";
-    # };
-    # extraConfig = {
-    #   branch.autosetuprebase = "always";
-    #   color.ui = true;
-    #   core.askPass = ""; # needs to be empty to use terminal for ask pass
-    #   credential.helper = "store"; # want to make this more secure
-    #   github.user = "mitchellh";
-    #   push.default = "tracking";
-    #   init.defaultBranch = "main";
-    # };
   };
 
   programs.go = {
@@ -327,7 +309,6 @@ in {
     ]);
 
     plugins = with pkgs; [
-      customVim.vim-copilot
       customVim.vim-cue
       customVim.vim-fish
       customVim.vim-fugitive
