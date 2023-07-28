@@ -250,30 +250,30 @@ in {
         { key = "Equals"; mods = "Command"; action = "IncreaseFontSize"; }
        # { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
       ];
-      colors =   {
+     colors =   {
         primary =     {
-          background = "0xffffff";
-          foreground = "0x24292f";
+          background = "0x24292e";
+          foreground = "0xd1d5da";
         };
         normal =     {
-          black = "0x24292e";
-          red = "0xd73a49";
-          green = "0x28a745";
-          yellow = "0xdbab09";
-          blue = "0x0366d6";
-          magenta = "0x5a32a3";
-          cyan = "0x0598bc";
-          white = "0x6a737d";
+          black = "0x586069";
+          red = "0xea4a5a";
+          green = "0x34d058";
+          yellow = "0xffea7f";
+          blue = "0x2188ff";
+          magenta = "0xb392f0";
+          cyan = "0x39c5cf";
+          white = "0xd1d5da";
         };
         bright =     {
           black = "0x959da5";
-          red = "0xcb2431";
-          green = "0x22863a";
-          yellow = "0xb08800";
-          blue = "0x005cc5";
-          magenta = "0x5a32a3";
-          cyan = "0x3192aa";
-          white = "0xd1d5da";
+          red = "0xf97583";
+          green = "0x85e89d";
+          yellow = "0xffea7f";
+          blue = "0x79b8ff";
+          magenta = "0xb392f0";
+          cyan = "0x56d4dd";
+          white = "0xfafbfc";
         };
         indexed_colors = [
           {
@@ -282,11 +282,10 @@ in {
           }
           {
             index = 17;
-            color = "0xcb2431";
+            color = "0xf97583";
           }
         ];
       };
-    };
   };
 
   programs.kitty = {
