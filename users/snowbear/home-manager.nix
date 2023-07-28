@@ -93,7 +93,7 @@ in {
   # Programs
   #---------------------------------------------------------------------
 
-  programs.gpg.enable = false; # !isDarwin;
+  programs.gpg.enable = !isDarwin;
 
   programs.bash = {
     enable = true;
@@ -306,7 +306,7 @@ in {
   };
 
   services.gpg-agent = {
-    enable = false; # isLinux;
+    enable = isLinux;
     pinentryFlavor = "tty";
 
     # cache the keys forever so we don't get asked for a password
