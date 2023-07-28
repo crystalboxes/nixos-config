@@ -36,8 +36,6 @@ in {
     pkgs.tree
     pkgs.watch
 
-    pkgs.telnet
-
     pkgs.gopls
     pkgs.zigpkgs.master
 
