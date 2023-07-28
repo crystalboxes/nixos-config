@@ -235,6 +235,12 @@ in {
 
     settings = {
       env.TERM = "xterm-256color";
+      font = {
+        size = 13.0;
+        normal = {
+          family = "Pragmata Pro Mono";
+        };
+      };
 
       key_bindings = [
         { key = "K"; mods = "Command"; chars = "ClearHistory"; }
