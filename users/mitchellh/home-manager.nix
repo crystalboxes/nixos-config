@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  # sources = import ../../nix/sources.nix;
+  sources = import ../../nix/sources.nix;
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
 
@@ -37,7 +37,7 @@ in {
     pkgs.watch
 
     pkgs.gopls
-    # pkgs.zigpkgs.master
+    pkgs.zigpkgs.master
 
     # Node is required for Copilot.vim
     pkgs.nodejs
@@ -81,13 +81,13 @@ in {
   xdg.configFile."rectangle/RectangleConfig.json".text = builtins.readFile ./RectangleConfig.json;
 
   # tree-sitter parsers
-  # xdg.configFile."nvim/parser/proto.so".source = "${pkgs.tree-sitter-proto}/parser";
-  # xdg.configFile."nvim/queries/proto/folds.scm".source =
-  #   "${sources.tree-sitter-proto}/queries/folds.scm";
-  # xdg.configFile."nvim/queries/proto/highlights.scm".source =
-  #   "${sources.tree-sitter-proto}/queries/highlights.scm";
-  # xdg.configFile."nvim/queries/proto/textobjects.scm".source =
-    # ./textobjects.scm;
+  xdg.configFile."nvim/parser/proto.so".source = "${pkgs.tree-sitter-proto}/parser";
+  xdg.configFile."nvim/queries/proto/folds.scm".source =
+    "${sources.tree-sitter-proto}/queries/folds.scm";
+  xdg.configFile."nvim/queries/proto/highlights.scm".source =
+    "${sources.tree-sitter-proto}/queries/highlights.scm";
+  xdg.configFile."nvim/queries/proto/textobjects.scm".source =
+    ./textobjects.scm;
 
   #---------------------------------------------------------------------
   # Programs
@@ -129,42 +129,42 @@ in {
     };
   };
 
-  # programs.fish = {
-  #   enable = true;
-  #   interactiveShellInit = lib.strings.concatStrings (lib.strings.intersperse "\n" ([
-  #     "source ${sources.theme-bobthefish}/functions/fish_prompt.fish"
-  #     "source ${sources.theme-bobthefish}/functions/fish_right_prompt.fish"
-  #     "source ${sources.theme-bobthefish}/functions/fish_title.fish"
-  #     (builtins.readFile ./config.fish)
-  #     "set -g SHELL ${pkgs.fish}/bin/fish"
-  #   ]));
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = lib.strings.concatStrings (lib.strings.intersperse "\n" ([
+      "source ${sources.theme-bobthefish}/functions/fish_prompt.fish"
+      "source ${sources.theme-bobthefish}/functions/fish_right_prompt.fish"
+      "source ${sources.theme-bobthefish}/functions/fish_title.fish"
+      (builtins.readFile ./config.fish)
+      "set -g SHELL ${pkgs.fish}/bin/fish"
+    ]));
 
-  #   shellAliases = {
-  #     ga = "git add";
-  #     gc = "git commit";
-  #     gco = "git checkout";
-  #     gcp = "git cherry-pick";
-  #     gdiff = "git diff";
-  #     gl = "git prettylog";
-  #     gp = "git push";
-  #     gs = "git status";
-  #     gt = "git tag";
-  #   } // (if isLinux then {
-  #     # Two decades of using a Mac has made this such a strong memory
-  #     # that I'm just going to keep it consistent.
-  #     pbcopy = "xclip";
-  #     pbpaste = "xclip -o";
-  #   } else {});
+    shellAliases = {
+      ga = "git add";
+      gc = "git commit";
+      gco = "git checkout";
+      gcp = "git cherry-pick";
+      gdiff = "git diff";
+      gl = "git prettylog";
+      gp = "git push";
+      gs = "git status";
+      gt = "git tag";
+    } // (if isLinux then {
+      # Two decades of using a Mac has made this such a strong memory
+      # that I'm just going to keep it consistent.
+      pbcopy = "xclip";
+      pbpaste = "xclip -o";
+    } else {});
 
-  #   plugins = map (n: {
-  #     name = n;
-  #     src  = sources.${n};
-  #   }) [
-  #     "fish-fzf"
-  #     "fish-foreign-env"
-  #     "theme-bobthefish"
-  #   ];
-  # };
+    plugins = map (n: {
+      name = n;
+      src  = sources.${n};
+    }) [
+      "fish-fzf"
+      "fish-foreign-env"
+      "theme-bobthefish"
+    ];
+  };
 
   programs.git = {
     enable = true;
@@ -210,6 +210,8 @@ in {
 
       bind -n C-k send-keys "clear"\; send-keys "Enter"
 
+      run-shell ${sources.tmux-pain-control}/pain_control.tmux
+      run-shell ${sources.tmux-dracula}/dracula.tmux
     '';
   };
 
@@ -252,56 +254,56 @@ in {
     };
   };
 
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs.neovim-nightly;
+  programs.neovim = {
+    enable = true;
+    package = pkgs.neovim-nightly;
 
-  #   withPython3 = true;
-  #   extraPython3Packages = (p: with p; [
-  #     # For nvim-magma
-  #     jupyter-client
-  #     cairosvg
-  #     plotly
-  #     #pnglatex
-  #     #kaleido
-  #   ]);
+    withPython3 = true;
+    extraPython3Packages = (p: with p; [
+      # For nvim-magma
+      jupyter-client
+      cairosvg
+      plotly
+      #pnglatex
+      #kaleido
+    ]);
 
-  #   plugins = with pkgs; [
-  #     customVim.vim-copilot
-  #     customVim.vim-cue
-  #     customVim.vim-fish
-  #     customVim.vim-fugitive
-  #     customVim.vim-glsl
-  #     customVim.vim-misc
-  #     customVim.vim-pgsql
-  #     customVim.vim-tla
-  #     customVim.vim-zig
-  #     customVim.pigeon
-  #     customVim.AfterColors
+    plugins = with pkgs; [
+      customVim.vim-copilot
+      customVim.vim-cue
+      customVim.vim-fish
+      customVim.vim-fugitive
+      customVim.vim-glsl
+      customVim.vim-misc
+      customVim.vim-pgsql
+      customVim.vim-tla
+      customVim.vim-zig
+      customVim.pigeon
+      customVim.AfterColors
 
-  #     customVim.vim-devicons
-  #     customVim.vim-nord
-  #     customVim.nvim-comment
-  #     customVim.nvim-lspconfig
-  #     customVim.nvim-plenary # required for telescope
-  #     customVim.nvim-telescope
-  #     customVim.nvim-treesitter
-  #     customVim.nvim-treesitter-playground
-  #     customVim.nvim-treesitter-textobjects
-  #     customVim.nvim-magma
+      customVim.vim-devicons
+      customVim.vim-nord
+      customVim.nvim-comment
+      customVim.nvim-lspconfig
+      customVim.nvim-plenary # required for telescope
+      customVim.nvim-telescope
+      customVim.nvim-treesitter
+      customVim.nvim-treesitter-playground
+      customVim.nvim-treesitter-textobjects
+      customVim.nvim-magma
 
-  #     vimPlugins.vim-airline
-  #     vimPlugins.vim-airline-themes
-  #     vimPlugins.vim-eunuch
-  #     vimPlugins.vim-gitgutter
+      vimPlugins.vim-airline
+      vimPlugins.vim-airline-themes
+      vimPlugins.vim-eunuch
+      vimPlugins.vim-gitgutter
 
-  #     vimPlugins.vim-markdown
-  #     vimPlugins.vim-nix
-  #     vimPlugins.typescript-vim
-  #   ];
+      vimPlugins.vim-markdown
+      vimPlugins.vim-nix
+      vimPlugins.typescript-vim
+    ];
 
-  #   extraConfig = (import ./vim-config.nix) { inherit sources; };
-  # };
+    extraConfig = (import ./vim-config.nix) { inherit sources; };
+  };
 
   services.gpg-agent = {
     enable = isLinux;
