@@ -250,7 +250,8 @@ in {
         { key = "Equals"; mods = "Command"; action = "IncreaseFontSize"; }
        # { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
       ];
-     colors =   {
+      
+      colors =   {
         primary =     {
           background = "0x24292e";
           foreground = "0xd1d5da";
@@ -286,6 +287,7 @@ in {
           }
         ];
       };
+    };
   };
 
   programs.kitty = {
