@@ -2,7 +2,7 @@
 {
   packages = [
     pkgs.helix
-    pkgs.pywright
+    pkgs.pyright
     pkgs.nil
   ];
 }

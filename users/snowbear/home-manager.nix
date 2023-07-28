@@ -3,10 +3,12 @@
 let
   sources = import ../../nix/sources.nix;
   helixImport = import ./helix.nix;
-  helix = helixImport { inherit pkgs };
+  helix = helixImport {
+      inherit pkgs;
+  };
 
   isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;  
+  isLinux = pkgs.stdenv.isLinux;
 
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
@@ -26,7 +28,7 @@ let
     '';
     meta = { description = "The Pragmata Pro Font derivation."; };
   };
-  
+
 in {
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
@@ -50,7 +52,7 @@ in {
     pkgs.ripgrep
     pkgs.tree
     pkgs.watch
-    
+
 
     pkgs.gopls
     pkgs.zigpkgs.master
@@ -68,7 +70,7 @@ in {
     pkgs.firefox
     pkgs.rofi
     pkgs.zathura
-    
+
     pragmatafont
   ]) ++ helix.packages;
 
@@ -233,7 +235,7 @@ in {
         { key = "Equals"; mods = "Command"; action = "IncreaseFontSize"; }
        # { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
       ];
-      
+
       colors =   {
         primary =     {
           background = "0x24292e";
