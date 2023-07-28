@@ -2,8 +2,8 @@
 
 let
   sources = import ../../nix/sources.nix;
-  helix = import ./helix.nix;
-  
+  helix = (import ./helix.nix) { pkgs };
+
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;  
 
