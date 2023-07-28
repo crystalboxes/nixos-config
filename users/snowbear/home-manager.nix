@@ -65,8 +65,7 @@ in {
         cp -R $src/ $out/share/fonts/
       '';
       meta = { description = "The Pragmata Pro Font derivation."; };
-    };
-
+    }
   ]);
 
   #---------------------------------------------------------------------
