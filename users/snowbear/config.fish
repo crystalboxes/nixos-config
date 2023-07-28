@@ -122,10 +122,10 @@ end
 contains $HOME/code/go/bin $fish_user_paths; or set -Ua fish_user_paths $HOME/code/go/bin
 contains $HOME/bin $fish_user_paths; or set -Ua fish_user_paths $HOME/bin
 
-# Exported variables
-if isatty
-    set -x GPG_TTY (tty)
-end
+# # Exported variables
+# if isatty
+#     set -x GPG_TTY (tty)
+# end
 
 #-------------------------------------------------------------------------------
 # Functions
