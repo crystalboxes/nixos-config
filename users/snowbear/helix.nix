@@ -5,4 +5,6 @@
     pkgs.pyright
     pkgs.nil
   ];
+
+  languages = builtins.readFile ./languages.toml;
 }

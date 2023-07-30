@@ -91,6 +91,7 @@ in {
   home.file.".inputrc".source = ./inputrc;
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
+  xdg.configFile."helix/languages.toml".text = helix.languages;
   xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
   xdg.configFile."devtty/config".text = builtins.readFile ./devtty;
 
