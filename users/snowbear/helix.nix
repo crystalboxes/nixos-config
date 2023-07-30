@@ -7,4 +7,5 @@
   ];
 
   languages = builtins.readFile ./languages.toml;
+  config = builtins.readFile ./helixconfig.toml;
 }
