@@ -56,6 +56,7 @@ in {
 
     pkgs.gopls
     pkgs.zigpkgs.master
+    pkgs.poetry
 
     (pkgs.python3.withPackages (p: with p; [
       ipython
