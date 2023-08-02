@@ -2,8 +2,8 @@
 {
   packages = [
     pkgs.helix
-    pkgs.pyright
     pkgs.nil
+    pkgs.python310Packages.python-lsp-server
 
     pkgs.black # python formatter
   ];
