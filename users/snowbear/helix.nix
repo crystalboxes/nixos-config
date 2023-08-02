@@ -4,6 +4,8 @@
     pkgs.helix
     pkgs.pyright
     pkgs.nil
+
+    pkgs.black # python formatter
   ];
 
   languages = builtins.readFile ./languages.toml;
