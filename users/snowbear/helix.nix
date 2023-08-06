@@ -3,7 +3,7 @@
   packages = [
     pkgs.helix
     pkgs.nil
-    pkgs.python310Packages.python-lsp-server
+    pkgs.pyright
 
     pkgs.black # python formatter
   ];
