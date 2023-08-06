@@ -1,8 +1,8 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   packages = [
     pkgs.helix
     pkgs.nil
+    pkgs.nixfmt
     pkgs.pyright
 
     pkgs.black # python formatter

@@ -10,4 +10,5 @@ config = ""
 name = "nix"
 language-server = { command = "nil", args = [] }
 auto-format = true
+formatter = {command = 'nixfmt'}
 config = ""
