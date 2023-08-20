@@ -8,11 +8,11 @@ config = ""
 
 [[language]]
 name = "ocaml"
-roots = ["pyproject.toml", "setup.py", "Poetry.lock", ".git"]
+file-types = ["ml"]
+roots = ["dune-project"]
 language-server = { command = "ocamllsp" }
 auto-format = true
-formatter = {command = 'ocamlformat'}
-config = ""
+formatter = {command = 'ocamlformat', args = ["-", "--impl"]}
 
 [[language]]
 name = "nix"
