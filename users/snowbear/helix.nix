@@ -4,7 +4,6 @@
     pkgs.nil
     pkgs.nixfmt
     pkgs.pyright
-
     pkgs.black # python formatter
   ];
 

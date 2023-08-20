@@ -7,6 +7,14 @@ formatter = {command = 'black', args = ["--quiet", "-"]}
 config = ""
 
 [[language]]
+name = "ocaml"
+roots = ["pyproject.toml", "setup.py", "Poetry.lock", ".git"]
+language-server = { command = "ocamllsp" }
+auto-format = true
+formatter = {command = 'ocamlformat'}
+config = ""
+
+[[language]]
 name = "nix"
 language-server = { command = "nil", args = [] }
 auto-format = true
