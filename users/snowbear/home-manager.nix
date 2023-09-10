@@ -52,6 +52,8 @@ in {
     pkgs.watch
     pkgs.gopls
     pkgs.zigpkgs.master
+    pkgs.mosh
+    pkgs.opam
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [

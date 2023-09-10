@@ -104,6 +104,8 @@ set -U fish_pager_color_description B3A06D yellow
 set -U fish_pager_color_prefix white --bold --underline
 set -U fish_pager_color_progress brwhite --background=cyan
 
+set -Ux LSCOLORS gxfxbEaEBxxEhEhBaDaCaD
+
 # Override the nix prompt for the theme so that we show a more concise prompt
 function __bobthefish_prompt_nix -S -d 'Display current nix environment'
     [ "$theme_display_nix" = 'no' -o -z "$IN_NIX_SHELL" ]

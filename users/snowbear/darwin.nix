@@ -6,7 +6,7 @@
   ];
 
   homebrew = {
-    enable = false;
+    enable = true;
     casks  = [
       # "cleanshot"
       # "discord"
