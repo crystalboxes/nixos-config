@@ -3,9 +3,7 @@
 let
   sources = import ../../nix/sources.nix;
   helixImport = import ./helix.nix;
-  helix = helixImport {
-      inherit pkgs;
-  };
+  helix = helixImport { inherit pkgs; };
 
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
@@ -14,7 +12,7 @@ let
   # https://github.com/sharkdp/bat/issues/1145
   manpager = (pkgs.writeShellScriptBin "manpager" (if isDarwin then ''
     sh -c 'col -bx | bat -l man -p'
-    '' else ''
+  '' else ''
     cat "$1" | col -bx | bat --language man --style plain
   ''));
 
@@ -52,15 +50,10 @@ in {
     pkgs.ripgrep
     pkgs.tree
     pkgs.watch
-
-
     pkgs.gopls
     pkgs.zigpkgs.master
 
-    (pkgs.python3.withPackages (p: with p; [
-      ipython
-      jupyter
-    ]))
+    (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
     # This is automatically setup on Linux
     pkgs.cachix
@@ -97,10 +90,12 @@ in {
   xdg.configFile."devtty/config".text = builtins.readFile ./devtty;
 
   # Rectangle.app. This has to be imported manually using the app.
-  xdg.configFile."rectangle/RectangleConfig.json".text = builtins.readFile ./RectangleConfig.json;
+  xdg.configFile."rectangle/RectangleConfig.json".text =
+    builtins.readFile ./RectangleConfig.json;
 
   # tree-sitter parsers
-  xdg.configFile."nvim/parser/proto.so".source = "${pkgs.tree-sitter-proto}/parser";
+  xdg.configFile."nvim/parser/proto.so".source =
+    "${pkgs.tree-sitter-proto}/parser";
   xdg.configFile."nvim/queries/proto/folds.scm".source =
     "${sources.tree-sitter-proto}/queries/folds.scm";
   xdg.configFile."nvim/queries/proto/highlights.scm".source =
@@ -116,7 +111,7 @@ in {
 
   programs.bash = {
     enable = true;
-    shellOptions = [];
+    shellOptions = [ ];
     historyControl = [ "ignoredups" "ignorespace" ];
     initExtra = builtins.readFile ./bashrc;
 
@@ -133,30 +128,31 @@ in {
     };
   };
 
-  programs.direnv= {
+  programs.direnv = {
     enable = true;
 
     config = {
       whitelist = {
-        prefix= [
+        prefix = [
           "$HOME/code/go/src/github.com/hashicorp"
           "$HOME/code/go/src/github.com/mitchellh"
         ];
 
-        exact = ["$HOME/.envrc"];
+        exact = [ "$HOME/.envrc" ];
       };
     };
   };
 
   programs.fish = {
     enable = true;
-    interactiveShellInit = lib.strings.concatStrings (lib.strings.intersperse "\n" ([
-      "source ${sources.theme-bobthefish}/functions/fish_prompt.fish"
-      "source ${sources.theme-bobthefish}/functions/fish_right_prompt.fish"
-      "source ${sources.theme-bobthefish}/functions/fish_title.fish"
-      (builtins.readFile ./config.fish)
-      "set -g SHELL ${pkgs.fish}/bin/fish"
-    ]));
+    interactiveShellInit = lib.strings.concatStrings
+      (lib.strings.intersperse "\n" ([
+        "source ${sources.theme-bobthefish}/functions/fish_prompt.fish"
+        "source ${sources.theme-bobthefish}/functions/fish_right_prompt.fish"
+        "source ${sources.theme-bobthefish}/functions/fish_title.fish"
+        (builtins.readFile ./config.fish)
+        "set -g SHELL ${pkgs.fish}/bin/fish"
+      ]));
 
     shellAliases = {
       ga = "git add";
@@ -173,16 +169,13 @@ in {
       # that I'm just going to keep it consistent.
       pbcopy = "xclip";
       pbpaste = "xclip -o";
-    } else {});
+    } else
+      { });
 
     plugins = map (n: {
       name = n;
-      src  = sources.${n};
-    }) [
-      "fish-fzf"
-      "fish-foreign-env"
-      "theme-bobthefish"
-    ];
+      src = sources.${n};
+    }) [ "fish-fzf" "fish-foreign-env" "theme-bobthefish" ];
   };
 
   programs.git = {
@@ -224,26 +217,44 @@ in {
       env.TERM = "xterm-256color";
       font = {
         size = 12.0;
-        normal = {
-          family = "Pragmata Pro Mono";
-        };
+        normal = { family = "Pragmata Pro Mono"; };
       };
 
       key_bindings = [
-        { key = "K"; mods = "Command"; chars = "ClearHistory"; }
-        { key = "V"; mods = "Command"; action = "Paste"; }
-        { key = "C"; mods = "Command"; action = "Copy"; }
-        { key = "Key0"; mods = "Command"; action = "ResetFontSize"; }
-        { key = "Equals"; mods = "Command"; action = "IncreaseFontSize"; }
-       # { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
+        {
+          key = "K";
+          mods = "Command";
+          chars = "ClearHistory";
+        }
+        {
+          key = "V";
+          mods = "Command";
+          action = "Paste";
+        }
+        {
+          key = "C";
+          mods = "Command";
+          action = "Copy";
+        }
+        {
+          key = "Key0";
+          mods = "Command";
+          action = "ResetFontSize";
+        }
+        {
+          key = "Equals";
+          mods = "Command";
+          action = "IncreaseFontSize";
+        }
+        # { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
       ];
 
-      colors =   {
-        primary =     {
+      colors = {
+        primary = {
           background = "0x24292e";
           foreground = "0xd1d5da";
         };
-        normal =     {
+        normal = {
           black = "0x586069";
           red = "0xea4a5a";
           green = "0x34d058";
@@ -253,7 +264,7 @@ in {
           cyan = "0x39c5cf";
           white = "0xd1d5da";
         };
-        bright =     {
+        bright = {
           black = "0x959da5";
           red = "0xf97583";
           green = "0x85e89d";
@@ -304,14 +315,15 @@ in {
     package = pkgs.neovim-nightly;
 
     withPython3 = true;
-    extraPython3Packages = (p: with p; [
-      # For nvim-magma
-      jupyter-client
-      cairosvg
-      plotly
-      #pnglatex
-      #kaleido
-    ]);
+    extraPython3Packages = (p:
+      with p; [
+        # For nvim-magma
+        jupyter-client
+        cairosvg
+        plotly
+        #pnglatex
+        #kaleido
+      ]);
 
     plugins = with pkgs; [
       customVim.vim-cue
@@ -348,7 +360,6 @@ in {
 
     extraConfig = (import ./vim-config.nix) { inherit sources; };
   };
-
   services.gpg-agent = {
     enable = isLinux;
     pinentryFlavor = "tty";
