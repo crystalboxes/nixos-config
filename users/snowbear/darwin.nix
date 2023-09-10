@@ -6,19 +6,18 @@
   ];
 
   homebrew = {
-    enable = true;
+    enable = false;
     casks  = [
-      "alfred"
-      "cleanshot"
-      "discord"
-      "google-chrome"
-      "imageoptim"
-      "istat-menus"
-      "monodraw"
-      "rectangle"
-      "screenflow"
-      "slack"
-      "spotify"
+      # "cleanshot"
+      # "discord"
+      # "google-chrome"
+      # "imageoptim"
+      # "istat-menus"
+      # "monodraw"
+      # "rectangle"
+      # "screenflow"
+      # "slack"
+      # "spotify"
     ];
   };
 

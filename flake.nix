@@ -78,7 +78,7 @@
     darwinConfigurations.macbook-pro-m1 = mkDarwin "macbook-pro-m1" {
       inherit darwin nixpkgs home-manager overlays;
       system = "aarch64-darwin";
-      user   = "mitchellh";
+      user   = "snowbear";
     };
   };
 }
