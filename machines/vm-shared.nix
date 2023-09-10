@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, currentSystemName,... }:
+{ config, pkgs, lib, currentSystem, currentSystemName, ... }:
 
 {
   # Be careful updating this.
@@ -17,8 +17,10 @@
     # this, use your own, or toss it. Its typically safe to use a binary cache
     # since the data inside is checksummed.
     settings = {
-      substituters = ["https://mitchellh-nixos-config.cachix.org"];
-      trusted-public-keys = ["mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ="];
+      substituters = [ "https://mitchellh-nixos-config.cachix.org" ];
+      trusted-public-keys = [
+        "mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ="
+      ];
     };
   };
 
@@ -77,9 +79,7 @@
       '';
     };
 
-    windowManager = {
-      i3.enable = true;
-    };
+    windowManager = { i3.enable = true; };
   };
 
   # Enable tailscale. We manually authenticate when we want with
@@ -101,34 +101,34 @@
   fonts = {
     fontDir.enable = true;
 
-    fonts = [
-      pkgs.fira-code
-    ];
+    fonts = [ pkgs.fira-code ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    cachix
-    gnumake
-    killall
-    niv
-    rxvt_unicode
-    xclip
-    config.boot.kernelPackages.perf
-    unzip
+  environment.systemPackages = with pkgs;
+    [
+      cachix
+      gnumake
+      killall
+      niv
+      rxvt_unicode
+      xclip
+      config.boot.kernelPackages.perf
+      unzip
+      nix-ld
 
-    # For hypervisors that support auto-resizing, this script forces it.
-    # I've noticed not everyone listens to the udev events so this is a hack.
-    (writeShellScriptBin "xrandr-auto" ''
-      xrandr --output Virtual-1 --auto
-    '')
-  ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
-    # This is needed for the vmware user tools clipboard to work.
-    # You can test if you don't need this by deleting this and seeing
-    # if the clipboard sill works.
-    gtkmm3
-  ];
+      # For hypervisors that support auto-resizing, this script forces it.
+      # I've noticed not everyone listens to the udev events so this is a hack.
+      (writeShellScriptBin "xrandr-auto" ''
+        xrandr --output Virtual-1 --auto
+      '')
+    ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
+      # This is needed for the vmware user tools clipboard to work.
+      # You can test if you don't need this by deleting this and seeing
+      # if the clipboard sill works.
+      gtkmm3
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -137,6 +137,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.nix-ld.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
