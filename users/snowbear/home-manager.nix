@@ -209,6 +209,7 @@ in {
 
       run-shell ${sources.tmux-pain-control}/pain_control.tmux
       run-shell ${sources.tmux-dracula}/dracula.tmux
+      set -sg escape-time 0
     '';
   };
 
