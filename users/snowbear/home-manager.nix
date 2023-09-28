@@ -54,6 +54,7 @@ in {
     pkgs.zigpkgs.master
     pkgs.mosh
     pkgs.opam
+    pkgs.nodejs_18
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
