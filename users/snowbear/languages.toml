@@ -27,3 +27,6 @@ auto-format = false
 
 [[language]]
 name = "go"
+
+[[language]]
+name = "html"
