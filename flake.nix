@@ -36,49 +36,58 @@
     zig.url = "github:mitchellh/zig-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs: let
-    mkDarwin = import ./lib/mkdarwin.nix;
-    mkVM = import ./lib/mkvm.nix;
+  outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:
+    let
+      mkDarwin = import ./lib/mkdarwin.nix;
+      mkVM = import ./lib/mkvm.nix;
 
-    # Overlays is the list of overlays we want to apply from flake inputs.
-    overlays = [
-      inputs.neovim-nightly-overlay.overlay
-      inputs.zig.overlays.default
-    ];
-  in {
-    nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" {
-      inherit nixpkgs home-manager;
-      system = "aarch64-linux";
-      user   = "snowbear";
+      # Overlays is the list of overlays we want to apply from flake inputs.
+      overlays = [
+        inputs.neovim-nightly-overlay.overlay
+        inputs.zig.overlays.default
 
-      overlays = overlays ++ [(final: prev: {
-        # Example of bringing in an unstable package:
-        # open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
-      })];
+        (final: prev: {
+          bun =
+            inputs.nixpkgs-unstable.legacyPackages.${prev.system}.bun; # open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
+        })
+      ];
+    in {
+      nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" {
+        inherit nixpkgs home-manager;
+        system = "aarch64-linux";
+        user = "snowbear";
+
+        overlays = overlays ++ [
+          (final: prev:
+            {
+              # Example of bringing in an unstable package:
+              # open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
+            })
+        ];
+      };
+
+      nixosConfigurations.vm-aarch64-prl = mkVM "vm-aarch64-prl" rec {
+        inherit overlays nixpkgs home-manager;
+        system = "aarch64-linux";
+        user = "mitchellh";
+      };
+
+      nixosConfigurations.vm-aarch64-utm = mkVM "vm-aarch64-utm" rec {
+        inherit overlays nixpkgs home-manager;
+        system = "aarch64-linux";
+        user = "mitchellh";
+      };
+
+      nixosConfigurations.vm-intel = mkVM "vm-intel" rec {
+        inherit nixpkgs home-manager overlays;
+        system = "x86_64-linux";
+        user = "mitchellh";
+      };
+
+      darwinConfigurations.macbook-pro-m1 = mkDarwin "macbook-pro-m1" {
+        inherit darwin nixpkgs home-manager overlays;
+        system = "aarch64-darwin";
+        user = "snowbear";
+      };
     };
-
-    nixosConfigurations.vm-aarch64-prl = mkVM "vm-aarch64-prl" rec {
-      inherit overlays nixpkgs home-manager;
-      system = "aarch64-linux";
-      user   = "mitchellh";
-    };
-
-    nixosConfigurations.vm-aarch64-utm = mkVM "vm-aarch64-utm" rec {
-      inherit overlays nixpkgs home-manager;
-      system = "aarch64-linux";
-      user   = "mitchellh";
-    };
-
-    nixosConfigurations.vm-intel = mkVM "vm-intel" rec {
-      inherit nixpkgs home-manager overlays;
-      system = "x86_64-linux";
-      user   = "mitchellh";
-    };
-
-    darwinConfigurations.macbook-pro-m1 = mkDarwin "macbook-pro-m1" {
-      inherit darwin nixpkgs home-manager overlays;
-      system = "aarch64-darwin";
-      user   = "snowbear";
-    };
-  };
 }

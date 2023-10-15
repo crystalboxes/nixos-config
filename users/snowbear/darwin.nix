@@ -1,13 +1,11 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.overlays = import ../../lib/overlays.nix ++ [
-    (import ./vim.nix)
-  ];
+  nixpkgs.overlays = import ../../lib/overlays.nix ++ [ (import ./vim.nix) ];
 
   homebrew = {
     enable = true;
-    casks  = [
+    casks = [
       # "cleanshot"
       # "discord"
       # "google-chrome"

@@ -54,6 +54,8 @@ in {
     pkgs.zigpkgs.master
     pkgs.mosh
     pkgs.nodejs_18
+    pkgs.nodePackages_latest.typescript-language-server
+    pkgs.yarn
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
@@ -77,7 +79,7 @@ in {
     LANG = "en_US.UTF-8";
     LC_CTYPE = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
-    EDITOR = "nvim";
+    EDITOR = "hx";
     PAGER = "less -FirSwX";
     MANPAGER = "${manpager}/bin/manpager";
   };
@@ -154,6 +156,8 @@ in {
         "source ${sources.theme-bobthefish}/functions/fish_title.fish"
         (builtins.readFile ./config.fish)
         "set -g SHELL ${pkgs.fish}/bin/fish"
+        "npm set prefix ~/.npm-global"
+        "set -Ux fish_user_paths $HOME/.npm-global/bin $fish_user_paths"
       ]));
 
     shellAliases = {

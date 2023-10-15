@@ -30,3 +30,21 @@ name = "go"
 
 [[language]]
 name = "html"
+
+[[language]]
+name = "javascript"
+
+[[language]]
+name = "typescript"
+
+[[language]]
+name = "jsx"
+
+[[language]]
+name = "tsx"
+
+[[language]]
+name = "css"
+
+[[language]]
+name = "json"
