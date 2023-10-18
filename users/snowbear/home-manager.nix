@@ -51,6 +51,7 @@ in {
     pkgs.tree
     pkgs.watch
     pkgs.gopls
+    pkgs.delve
     pkgs.zigpkgs.master
     pkgs.mosh
     pkgs.nodejs_18
