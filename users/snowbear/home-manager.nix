@@ -56,6 +56,7 @@ in {
     pkgs.mosh
     pkgs.nodejs_18
     pkgs.nodePackages_latest.typescript-language-server
+    pkgs.fswatch
     pkgs.yarn
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
