@@ -22,6 +22,10 @@ formatter = {command = 'nixfmt'}
 config = ""
 
 [[language]]
+name = "graphql"
+language-server = { command = "graphql-lsp", args = ["server", "-m", "stream"]  }
+
+[[language]]
 name = "rust"
 auto-format = false
 
@@ -61,4 +65,6 @@ formatter = { command = 'prettier', args = ["--parser", "css"] }
 [[language]]
 name = "json"
 formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+
 
