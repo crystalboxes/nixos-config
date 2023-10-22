@@ -56,6 +56,8 @@ in {
     pkgs.mosh
     pkgs.nodejs_18
     pkgs.nodePackages_latest.typescript-language-server
+    pkgs.nodePackages.graphql-language-service-cli
+
     pkgs.fswatch
     pkgs.yarn
 
