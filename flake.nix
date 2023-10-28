@@ -50,6 +50,7 @@
           bun = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.bun;
           helix = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helix;
           go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go;
+          gopls = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gopls;
         })
       ];
     in {
