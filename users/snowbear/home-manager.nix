@@ -57,7 +57,7 @@ in {
     pkgs.nodejs_18
     pkgs.nodePackages_latest.typescript-language-server
     pkgs.nodePackages.graphql-language-service-cli
-    pkgs.go-unstable
+    pkgs.go
     pkgs.bun
 
     pkgs.fswatch

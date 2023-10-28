@@ -49,7 +49,7 @@
         (final: prev: {
           bun = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.bun;
           helix = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helix;
-          go-unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go;
+          go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go;
         })
       ];
     in {
