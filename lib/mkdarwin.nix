@@ -2,8 +2,7 @@
 name:
 { darwin, nixpkgs, home-manager, system, user, overlays }:
 
-let _ = builtins.trace "Current overlays are: ${builtins.toJSON overlays}" null;
-in darwin.lib.darwinSystem rec {
+darwin.lib.darwinSystem rec {
   inherit system;
 
   modules = [

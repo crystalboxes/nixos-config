@@ -57,8 +57,11 @@ in {
     pkgs.nodejs_18
     pkgs.nodePackages_latest.typescript-language-server
     pkgs.nodePackages.graphql-language-service-cli
+    pkgs.go-unstable
+    pkgs.bun
 
     pkgs.fswatch
+    pkgs.watchman
     pkgs.yarn
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
@@ -136,20 +139,20 @@ in {
     };
   };
 
-  programs.direnv = {
-    enable = true;
+  # programs.direnv = {
+  #   enable = true;
 
-    config = {
-      whitelist = {
-        prefix = [
-          "$HOME/code/go/src/github.com/hashicorp"
-          "$HOME/code/go/src/github.com/mitchellh"
-        ];
+  #   config = {
+  #     whitelist = {
+  #       prefix = [
+  #         "$HOME/code/go/src/github.com/hashicorp"
+  #         "$HOME/code/go/src/github.com/mitchellh"
+  #       ];
 
-        exact = [ "$HOME/.envrc" ];
-      };
-    };
-  };
+  #       exact = [ "$HOME/.envrc" ];
+  #     };
+  #   };
+  # };
 
   programs.fish = {
     enable = true;
@@ -194,11 +197,11 @@ in {
     userEmail = "crystalboxesgfx@gmail.com";
   };
 
-  programs.go = {
-    enable = true;
-    goPath = "code/go";
-    goPrivate = [ "github.com/mitchellh" "github.com/hashicorp" "rfc822.mx" ];
-  };
+  # programs.go = {
+  #   enable = true;
+  #   goPath = "code/go";
+  #   goPrivate = [ "github.com/mitchellh" "github.com/hashicorp" "rfc822.mx" ];
+  # };
 
   programs.tmux = {
     enable = true;
@@ -321,56 +324,56 @@ in {
     };
   };
 
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim-nightly;
+  # programs.neovim = {
+  #   enable = true;
+  #   package = pkgs.neovim-nightly;
 
-    withPython3 = true;
-    extraPython3Packages = (p:
-      with p; [
-        # For nvim-magma
-        jupyter-client
-        cairosvg
-        plotly
-        #pnglatex
-        #kaleido
-      ]);
+  #   withPython3 = true;
+  #   extraPython3Packages = (p:
+  #     with p; [
+  #       # For nvim-magma
+  #       jupyter-client
+  #       cairosvg
+  #       plotly
+  #       #pnglatex
+  #       #kaleido
+  #     ]);
 
-    plugins = with pkgs; [
-      customVim.vim-cue
-      customVim.vim-fish
-      customVim.vim-fugitive
-      customVim.vim-glsl
-      customVim.vim-misc
-      customVim.vim-pgsql
-      customVim.vim-tla
-      customVim.vim-zig
-      customVim.pigeon
-      customVim.AfterColors
+  #   plugins = with pkgs; [
+  #     customVim.vim-cue
+  #     customVim.vim-fish
+  #     customVim.vim-fugitive
+  #     customVim.vim-glsl
+  #     customVim.vim-misc
+  #     customVim.vim-pgsql
+  #     customVim.vim-tla
+  #     customVim.vim-zig
+  #     customVim.pigeon
+  #     customVim.AfterColors
 
-      customVim.vim-devicons
-      customVim.vim-nord
-      customVim.nvim-comment
-      customVim.nvim-lspconfig
-      customVim.nvim-plenary # required for telescope
-      customVim.nvim-telescope
-      customVim.nvim-treesitter
-      customVim.nvim-treesitter-playground
-      customVim.nvim-treesitter-textobjects
-      customVim.nvim-magma
+  #     customVim.vim-devicons
+  #     customVim.vim-nord
+  #     customVim.nvim-comment
+  #     customVim.nvim-lspconfig
+  #     customVim.nvim-plenary # required for telescope
+  #     customVim.nvim-telescope
+  #     customVim.nvim-treesitter
+  #     customVim.nvim-treesitter-playground
+  #     customVim.nvim-treesitter-textobjects
+  #     customVim.nvim-magma
 
-      vimPlugins.vim-airline
-      vimPlugins.vim-airline-themes
-      vimPlugins.vim-eunuch
-      vimPlugins.vim-gitgutter
+  #     vimPlugins.vim-airline
+  #     vimPlugins.vim-airline-themes
+  #     vimPlugins.vim-eunuch
+  #     vimPlugins.vim-gitgutter
 
-      vimPlugins.vim-markdown
-      vimPlugins.vim-nix
-      vimPlugins.typescript-vim
-    ];
+  #     vimPlugins.vim-markdown
+  #     vimPlugins.vim-nix
+  #     vimPlugins.typescript-vim
+  #   ];
 
-    extraConfig = (import ./vim-config.nix) { inherit sources; };
-  };
+  #   extraConfig = (import ./vim-config.nix) { inherit sources; };
+  # };
   services.gpg-agent = {
     enable = isLinux;
     pinentryFlavor = "tty";

@@ -1,29 +1,42 @@
+[language-server.pyright-langserver]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.nil]
+command = "nil"
+args = []
+
+[language-server.ocamllsp]
+command = "ocamllsp"
+
+[language-server.graphql-lsp]
+command = "graphql-lsp"
+args = ["server", "-m", "stream"]  
+
 [[language]]
 name = "python"
 roots = ["pyproject.toml", "setup.py", "Poetry.lock", ".git"]
-language-server = { command = "pyright-langserver", args = ["--stdio"] }
+language-servers = ["pyright-langserver"]
 auto-format = true
 formatter = {command = 'black', args = ["--quiet", "-"]}
-config = ""
 
 [[language]]
 name = "ocaml"
 file-types = ["ml"]
 roots = ["dune-project"]
-language-server = { command = "ocamllsp" }
+language-servers = ["ocamllsp"]
 auto-format = true
 formatter = {command = 'ocamlformat', args = ["-", "--impl"]}
 
 [[language]]
 name = "nix"
-language-server = { command = "nil", args = [] }
+language-servers = ["nil"]
 auto-format = true
 formatter = {command = 'nixfmt'}
-config = ""
 
 [[language]]
 name = "graphql"
-language-server = { command = "graphql-lsp", args = ["server", "-m", "stream"]  }
+language-servers = ["graphql-lsp"]
 
 [[language]]
 name = "rust"
@@ -65,6 +78,3 @@ formatter = { command = 'prettier', args = ["--parser", "css"] }
 [[language]]
 name = "json"
 formatter = { command = 'prettier', args = ["--parser", "json"] }
-
-
-
