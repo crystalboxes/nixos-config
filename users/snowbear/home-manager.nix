@@ -59,6 +59,9 @@ in {
     pkgs.nodePackages.graphql-language-service-cli
     pkgs.go
     pkgs.bun
+    pkgs.poetry
+    pkgs.d2
+    pkgs.clang-tools
 
     pkgs.fswatch
     pkgs.watchman

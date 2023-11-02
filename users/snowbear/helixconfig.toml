@@ -4,3 +4,9 @@ mouse = false
 
 [editor.file-picker]
 hidden = false
+
+[keys.normal]
+"space" = { "F" = "file_picker", "f" = "file_picker_in_current_directory" }
+
+[keys.select]
+"space" = { "F" = "file_picker", "f" = "file_picker_in_current_directory" }
