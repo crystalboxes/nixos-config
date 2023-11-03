@@ -50,7 +50,10 @@
           bun = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.bun;
           helix = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helix;
           go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go;
+          delve = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.delve;
           gopls = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gopls;
+          gdb = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gdb;
+          d2 = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.d2;
         })
       ];
     in {

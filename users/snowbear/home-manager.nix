@@ -61,6 +61,7 @@ in {
     pkgs.bun
     pkgs.poetry
     pkgs.d2
+
     pkgs.clang-tools
 
     pkgs.fswatch

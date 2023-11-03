@@ -78,3 +78,7 @@ formatter = { command = 'prettier', args = ["--parser", "css"] }
 [[language]]
 name = "json"
 formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[[language]]
+name = "c"
+auto-format = true
