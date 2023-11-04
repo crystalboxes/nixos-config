@@ -64,3 +64,7 @@ color14  #56b6c2
 # white
 color7   #dcdfe4
 color15  #dcdfe4
+
+macos_option_as_alt left
+macos_titlebar_color background
+confirm_os_window_close 0
