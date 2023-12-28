@@ -68,6 +68,8 @@ in {
     pkgs.watchman
     pkgs.yarn
 
+    pkgs.direnv
+
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
     # This is automatically setup on Linux

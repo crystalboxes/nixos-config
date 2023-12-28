@@ -1,3 +1,5 @@
+theme = "github_light"
+
 [editor]
 line-number = "relative"
 mouse = false
