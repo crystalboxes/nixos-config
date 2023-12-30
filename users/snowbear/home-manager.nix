@@ -4,6 +4,30 @@ let
   sources = import ../../nix/sources.nix;
   helixImport = import ./helix.nix;
   helix = helixImport { inherit pkgs; };
+  fishPlugins = pkgs.writeShellScriptBin "install-kubectl-completion" ''
+    # Define the directory and file paths
+     FISH_CONFIG_DIR="$HOME/.config/fish"
+     COMPLETIONS_DIR="$FISH_CONFIG_DIR/completions"
+     REPO_DIR="$FISH_CONFIG_DIR/fish-kubectl-completions"
+     COMPLETION_FILE="$COMPLETIONS_DIR/kubectl.fish"
+
+     # Create the completions directory if it doesn't exist
+     mkdir -p $COMPLETIONS_DIR
+
+     # Clone the repository if it hasn't been cloned yet
+     if [ ! -d "$REPO_DIR" ]; then
+       git clone https://github.com/evanlucas/fish-kubectl-completions $REPO_DIR
+     else
+       echo "Repository already cloned."
+     fi
+
+     # Link the completion script if it hasn't been linked yet
+     if [ ! -L "$COMPLETION_FILE" ]; then
+       ln -s ../fish-kubectl-completions/completions/kubectl.fish $COMPLETION_FILE
+     else
+       echo "Completion file already linked."
+     fi
+  '';
 
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
@@ -69,6 +93,10 @@ in {
     pkgs.yarn
 
     pkgs.direnv
+    pkgs.kind
+    pkgs.kubectl
+
+    pkgs.yaml-language-server
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
@@ -87,6 +115,10 @@ in {
   #---------------------------------------------------------------------
   # Env vars and dotfiles
   #---------------------------------------------------------------------
+  home.activation.installKubectlCompletion =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      ${fishPlugins}/bin/install-kubectl-completion
+    '';
 
   home.sessionVariables = {
     LANG = "en_US.UTF-8";

@@ -82,3 +82,8 @@ formatter = { command = 'prettier', args = ["--parser", "json"] }
 [[language]]
 name = "c"
 auto-format = true
+
+[[language]]
+name = "yaml"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
