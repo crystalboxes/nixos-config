@@ -95,6 +95,7 @@ in {
     pkgs.direnv
     pkgs.kind
     pkgs.kubectl
+    pkgs.air
 
     pkgs.yaml-language-server
 
