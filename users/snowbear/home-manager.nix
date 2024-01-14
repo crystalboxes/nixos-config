@@ -97,11 +97,11 @@ in {
     pkgs.kubectl
     pkgs.air
 
-    pkgs.helm-ls
     pkgs.yaml-language-server
 
     pkgs.terraform
     pkgs.terraform-ls
+    pkgs.taplo
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
