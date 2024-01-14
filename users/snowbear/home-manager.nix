@@ -78,7 +78,7 @@ in {
     pkgs.delve
     pkgs.zigpkgs.master
     pkgs.mosh
-    pkgs.nodejs_18
+    pkgs.nodejs_20
     pkgs.nodePackages_latest.typescript-language-server
     pkgs.nodePackages.graphql-language-service-cli
     pkgs.go
@@ -97,7 +97,11 @@ in {
     pkgs.kubectl
     pkgs.air
 
+    pkgs.helm-ls
     pkgs.yaml-language-server
+
+    pkgs.terraform
+    pkgs.terraform-ls
 
     (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
