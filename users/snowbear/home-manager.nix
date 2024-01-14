@@ -98,6 +98,7 @@ in {
     pkgs.air
 
     pkgs.yaml-language-server
+    pkgs.kubernetes-helm
 
     pkgs.terraform
     pkgs.terraform-ls
