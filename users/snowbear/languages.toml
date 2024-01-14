@@ -13,6 +13,10 @@ command = "ocamllsp"
 command = "graphql-lsp"
 args = ["server", "-m", "stream"]  
 
+[language-server.helm-ls]
+command = "helm_ls"
+args = ["serve"]
+
 [[language]]
 name = "python"
 roots = ["pyproject.toml", "setup.py", "Poetry.lock", ".git"]
@@ -44,6 +48,12 @@ auto-format = false
 
 [[language]]
 name = "go"
+
+[[language]]
+name = "hcl"
+
+[[language]]
+name = "tfvars"
 
 [[language]]
 name = "html"
@@ -87,3 +97,4 @@ auto-format = true
 name = "yaml"
 auto-format = true
 formatter = { command = "prettier", args = ["--parser", "yaml"] }
+language-servers = ["helm-ls"]
