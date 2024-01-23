@@ -54,6 +54,7 @@
           gopls = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gopls;
           gdb = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gdb;
           d2 = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.d2;
+          k3d = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.k3d;
           helm-ls =
             inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helm-ls;
         })

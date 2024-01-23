@@ -93,7 +93,7 @@ in {
     pkgs.yarn
 
     pkgs.direnv
-    pkgs.kind
+    pkgs.k3d
     pkgs.kubectl
     pkgs.air
 
