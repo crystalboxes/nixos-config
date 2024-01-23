@@ -1,4 +1,4 @@
-theme = "github_light"
+theme = "github_dark_dimmed"
 
 [editor]
 line-number = "relative"
