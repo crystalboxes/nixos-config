@@ -55,6 +55,10 @@
           gdb = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gdb;
           d2 = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.d2;
           k3d = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.k3d;
+          kubectl =
+            inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kubectl;
+          awscli2 =
+            inputs.nixpkgs-unstable.legacyPackages.${prev.system}.awscli2;
           helm-ls =
             inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helm-ls;
         })

@@ -99,6 +99,7 @@ in {
 
     pkgs.yaml-language-server
     pkgs.kubernetes-helm
+    pkgs.awscli2
 
     pkgs.terraform
     pkgs.terraform-ls
