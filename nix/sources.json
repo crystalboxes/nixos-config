@@ -179,6 +179,18 @@
     "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/1eaed8c39951029fa7839859abd5518977a80f83.tar.gz",
     "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
   },
+  "theme-clearance": {
+    "branch": "master",
+    "description": "Merge pull request #5 from bobthecow/moar-fishier\n\nUse fishier conventions for file paths",
+    "homepage": "",
+    "owner": "oh-my-fish",
+    "repo": "theme-clearance",
+    "rev": "10683bae6e8481b1ca4196b2079881ab1862fa97",
+    "sha256": "0aavs5jdg0z81h56r3nsf0373zs534gjaca7wlsc29g0qd7z1kxg",
+    "type": "tarball",
+    "url": "https://github.com/oh-my-fish/theme-clearance/archive/10683bae6e8481b1ca4196b2079881ab1862fa97.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  },
   "theme-kawasaki": {
     "branch": "master",
     "description": "Refactor: move functions to functions dir",

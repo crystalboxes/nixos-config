@@ -183,28 +183,14 @@ in {
     };
   };
 
-  # programs.direnv = {
-  #   enable = true;
-
-  #   config = {
-  #     whitelist = {
-  #       prefix = [
-  #         "$HOME/code/go/src/github.com/hashicorp"
-  #         "$HOME/code/go/src/github.com/mitchellh"
-  #       ];
-
-  #       exact = [ "$HOME/.envrc" ];
-  #     };
-  #   };
-  # };
 
   programs.fish = {
     enable = true;
     interactiveShellInit = lib.strings.concatStrings
       (lib.strings.intersperse "\n" ([
-        "source ${sources.theme-kawasaki}/functions/fish_prompt.fish"
-        "source ${sources.theme-kawasaki}/functions/fish_right_prompt.fish"
-        "source ${sources.theme-kawasaki}/functions/fish_title.fish"
+        "source ${sources.theme-clearance}/functions/fish_prompt.fish"
+        # "source ${sources.theme-clearance}/functions/fish_right_prompt.fish"
+        # "source ${sources.theme-clearance}/functions/fish_title.fish"
         (builtins.readFile ./config.fish)
         "set -g SHELL ${pkgs.fish}/bin/fish"
         "npm set prefix ~/.npm-global"
@@ -241,12 +227,6 @@ in {
     userEmail = "crystalboxesgfx@gmail.com";
   };
 
-  # programs.go = {
-  #   enable = true;
-  #   goPath = "code/go";
-  #   goPrivate = [ "github.com/mitchellh" "github.com/hashicorp" "rfc822.mx" ];
-  # };
-
   programs.tmux = {
     enable = true;
     terminal = "xterm-256color";
@@ -267,84 +247,6 @@ in {
       set -sg escape-time 0
       setw -g mouse on
     '';
-  };
-
-  programs.alacritty = {
-    enable = true;
-
-    settings = {
-      env.TERM = "xterm-256color";
-      font = {
-        size = 12.0;
-        normal = { family = "Pragmata Pro Mono"; };
-      };
-
-      key_bindings = [
-        {
-          key = "K";
-          mods = "Command";
-          chars = "ClearHistory";
-        }
-        {
-          key = "V";
-          mods = "Command";
-          action = "Paste";
-        }
-        {
-          key = "C";
-          mods = "Command";
-          action = "Copy";
-        }
-        {
-          key = "Key0";
-          mods = "Command";
-          action = "ResetFontSize";
-        }
-        {
-          key = "Equals";
-          mods = "Command";
-          action = "IncreaseFontSize";
-        }
-        # { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
-      ];
-
-      colors = {
-        primary = {
-          background = "0x24292e";
-          foreground = "0xd1d5da";
-        };
-        normal = {
-          black = "0x586069";
-          red = "0xea4a5a";
-          green = "0x34d058";
-          yellow = "0xffea7f";
-          blue = "0x2188ff";
-          magenta = "0xb392f0";
-          cyan = "0x39c5cf";
-          white = "0xd1d5da";
-        };
-        bright = {
-          black = "0x959da5";
-          red = "0xf97583";
-          green = "0x85e89d";
-          yellow = "0xffea7f";
-          blue = "0x79b8ff";
-          magenta = "0xb392f0";
-          cyan = "0x56d4dd";
-          white = "0xfafbfc";
-        };
-        indexed_colors = [
-          {
-            index = 16;
-            color = "0xd18616";
-          }
-          {
-            index = 17;
-            color = "0xf97583";
-          }
-        ];
-      };
-    };
   };
 
   programs.kitty = {
