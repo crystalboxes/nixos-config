@@ -93,12 +93,13 @@ in {
     pkgs.yarn
 
     pkgs.direnv
-    pkgs.kind
+    pkgs.k3d
     pkgs.kubectl
     pkgs.air
 
     pkgs.yaml-language-server
     pkgs.kubernetes-helm
+    pkgs.awscli2
 
     pkgs.terraform
     pkgs.terraform-ls
