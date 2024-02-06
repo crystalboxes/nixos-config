@@ -184,7 +184,6 @@ in {
     };
   };
 
-
   programs.fish = {
     enable = true;
     interactiveShellInit = lib.strings.concatStrings
@@ -244,7 +243,7 @@ in {
       bind -n C-k send-keys "clear"\; send-keys "Enter"
 
       run-shell ${sources.tmux-pain-control}/pain_control.tmux
-      run-shell ${sources.tmux-dracula}/dracula.tmux
+      # run-shell ${sources.tmux-dracula}/dracula.tmux
       set -sg escape-time 0
       setw -g mouse on
     '';
