@@ -40,7 +40,6 @@ let
     cat "$1" | col -bx | bat --language man --style plain
   ''));
 
-
 in {
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
@@ -73,7 +72,6 @@ in {
     pkgs.nodePackages.graphql-language-service-cli
     pkgs.go
     pkgs.bun
-    pkgs.poetry
     pkgs.d2
 
     pkgs.clang-tools
