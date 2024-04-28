@@ -63,9 +63,6 @@
             inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helm-ls;
         })
       ];
-      linuxsystem = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${linuxsystem};
-      # pkgs.overlays = overlays;
     in {
       nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" {
         inherit nixpkgs home-manager;
@@ -87,13 +84,26 @@
       };
 
       homeConfigurations = {
-          snowbear = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              { nixpkgs.overlays = overlays; }
-              ./users/snowbear/home-manager.nix
-            ];
-          };
-        };      
+        snowbear-x86_64 = let
+          linuxsystem = "x86_64-linux";
+          pkgs = nixpkgs.legacyPackages.${linuxsystem};
+        in home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            { nixpkgs.overlays = overlays; }
+            ./users/snowbear/home-manager.nix
+          ];
+        };
+        snowbear-aarch64 = let
+          linuxsystem = "aarch64-linux";
+          pkgs = nixpkgs.legacyPackages.${linuxsystem};
+        in home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            { nixpkgs.overlays = overlays; }
+            ./users/snowbear/home-manager.nix
+          ];
+        };
+      };
     };
 }
