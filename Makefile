@@ -24,6 +24,9 @@ else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
 
+ubuntu/switch:
+	nix run nixpkgs#home-manager -- switch --flake .#${NIXUSER} --show-trace --option eval-cache false --impure
+
 test:
 ifeq ($(UNAME), Darwin)
 	nix build ".#darwinConfigurations.${NIXNAME}.system"
