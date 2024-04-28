@@ -26,7 +26,7 @@ else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
 
-switch:
+ubuntu/switch:
 	nix run nixpkgs#home-manager -- switch --flake .#${NIXUSER} --show-trace --option eval-cache false --impure
 
 test:
