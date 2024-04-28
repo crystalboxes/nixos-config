@@ -40,16 +40,6 @@ let
     cat "$1" | col -bx | bat --language man --style plain
   ''));
 
-  pragmatafont = pkgs.stdenvNoCC.mkDerivation {
-    name = "pragmata-font";
-    dontConfigue = true;
-    src = ./fonts;
-    installPhase = ''
-      mkdir -p $out/share/fonts
-      cp -R $src/ $out/share/fonts/
-    '';
-    meta = { description = "The Pragmata Pro Font derivation."; };
-  };
 
 in {
   # Home-manager 22.11 requires this be set. We never set it so we have
@@ -104,19 +94,12 @@ in {
     pkgs.terraform
     pkgs.terraform-ls
     pkgs.taplo
-
-    (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
+    pkgs.python3
+    # (pkgs.python3.withPackages (p: with p; [ ipython jupyter ]))
   ] ++ (lib.optionals isDarwin [
     # This is automatically setup on Linux
     pkgs.cachix
     pkgs.tailscale
-  ]) ++ (lib.optionals isLinux [
-    pkgs.chromium
-    pkgs.firefox
-    pkgs.rofi
-    pkgs.zathura
-
-    pragmatafont
   ]) ++ helix.packages;
 
   #---------------------------------------------------------------------
@@ -149,15 +132,15 @@ in {
   xdg.configFile."rectangle/RectangleConfig.json".text =
     builtins.readFile ./RectangleConfig.json;
 
-  # tree-sitter parsers
-  xdg.configFile."nvim/parser/proto.so".source =
-    "${pkgs.tree-sitter-proto}/parser";
-  xdg.configFile."nvim/queries/proto/folds.scm".source =
-    "${sources.tree-sitter-proto}/queries/folds.scm";
-  xdg.configFile."nvim/queries/proto/highlights.scm".source =
-    "${sources.tree-sitter-proto}/queries/highlights.scm";
-  xdg.configFile."nvim/queries/proto/textobjects.scm".source =
-    ./textobjects.scm;
+  # # tree-sitter parsers
+  # xdg.configFile."nvim/parser/proto.so".source =
+  #   "${pkgs.tree-sitter-proto}/parser";
+  # xdg.configFile."nvim/queries/proto/folds.scm".source =
+  #   "${sources.tree-sitter-proto}/queries/folds.scm";
+  # xdg.configFile."nvim/queries/proto/highlights.scm".source =
+  #   "${sources.tree-sitter-proto}/queries/highlights.scm";
+  # xdg.configFile."nvim/queries/proto/textobjects.scm".source =
+  #   ./textobjects.scm;
 
   #---------------------------------------------------------------------
   # Programs
@@ -254,89 +237,5 @@ in {
     extraConfig = builtins.readFile ./kitty;
   };
 
-  programs.i3status = {
-    enable = isLinux;
-
-    general = {
-      colors = true;
-      color_good = "#8C9440";
-      color_bad = "#A54242";
-      color_degraded = "#DE935F";
-    };
-
-    modules = {
-      ipv6.enable = false;
-      "wireless _first_".enable = false;
-      "battery all".enable = false;
-    };
-  };
-
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs.neovim-nightly;
-
-  #   withPython3 = true;
-  #   extraPython3Packages = (p:
-  #     with p; [
-  #       # For nvim-magma
-  #       jupyter-client
-  #       cairosvg
-  #       plotly
-  #       #pnglatex
-  #       #kaleido
-  #     ]);
-
-  #   plugins = with pkgs; [
-  #     customVim.vim-cue
-  #     customVim.vim-fish
-  #     customVim.vim-fugitive
-  #     customVim.vim-glsl
-  #     customVim.vim-misc
-  #     customVim.vim-pgsql
-  #     customVim.vim-tla
-  #     customVim.vim-zig
-  #     customVim.pigeon
-  #     customVim.AfterColors
-
-  #     customVim.vim-devicons
-  #     customVim.vim-nord
-  #     customVim.nvim-comment
-  #     customVim.nvim-lspconfig
-  #     customVim.nvim-plenary # required for telescope
-  #     customVim.nvim-telescope
-  #     customVim.nvim-treesitter
-  #     customVim.nvim-treesitter-playground
-  #     customVim.nvim-treesitter-textobjects
-  #     customVim.nvim-magma
-
-  #     vimPlugins.vim-airline
-  #     vimPlugins.vim-airline-themes
-  #     vimPlugins.vim-eunuch
-  #     vimPlugins.vim-gitgutter
-
-  #     vimPlugins.vim-markdown
-  #     vimPlugins.vim-nix
-  #     vimPlugins.typescript-vim
-  #   ];
-
-  #   extraConfig = (import ./vim-config.nix) { inherit sources; };
-  # };
-  services.gpg-agent = {
-    enable = isLinux;
-    pinentryFlavor = "tty";
-
-    # cache the keys forever so we don't get asked for a password
-    defaultCacheTtl = 31536000;
-    maxCacheTtl = 31536000;
-  };
-
   xresources.extraConfig = builtins.readFile ./Xresources;
-
-  # Make cursor not tiny on HiDPI screens
-  home.pointerCursor = lib.mkIf isLinux {
-    name = "Vanilla-DMZ";
-    package = pkgs.vanilla-dmz;
-    size = 128;
-    x11.enable = true;
-  };
 }

@@ -20,6 +20,8 @@ switch:
 ifeq ($(UNAME), Darwin)
 	nix build ".#darwinConfigurations.${NIXNAME}.system"
 	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
+else ifeq ($(UNAME), Linux)
+	NIXPKGS_ALLOW_UNFREE=1 nix run nixpkgs#home-manager -- switch --flake .#${NIXUSER} --show-trace --option eval-cache false --impure
 else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
